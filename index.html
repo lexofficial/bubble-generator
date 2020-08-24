@@ -7,11 +7,26 @@
 let canvas = document.getElementById("myCanvas");
 let context = canvas.getContext("2d");
 
+let blobs = [];
+
 class Blob {
   constructor() {
     this.radius = Math.floor(Math.random() * (15 - 5) + 5);
     this.x = Math.floor(Math.random() * 600);
     this.y = Math.floor(Math.random() * 600);
+    this.isTouchingBlobs = false;
+    this.blobsChecked = 0;
+    for (let i = 0; i < blobs.length; i++) {
+      this.blobsChecked++;
+      this.distance_x = Math.abs(blobs[i].x - this.x);
+      this.distance_y = Math.abs(blobs[i].y - this.y);
+      this.radii_sum = blobs[i].radius + this.radius;
+      this.formula = Math.sqrt(Math.pow(this.distance_x, 2) + Math.pow(this.distance_y, 2))
+      if (this.formula != this.radii_sum && this.formula < this.radii_sum){
+        this.isTouchingBlobs = true;
+      }
+    }
+    if(this.isTouchingBlobs == false) {
     context.beginPath();
     context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
     context.fillStyle = `#${Math.floor(Math.random() * 2000)}`
@@ -22,11 +37,27 @@ class Blob {
       context.fillStyle = `#${Math.floor(Math.random() * 1000)}`
       context.fill();
     },100)
+  
+  }
+  
   }
 }
 
+// Start creating blobs
+
 setInterval(() => {
-  new Blob;
-},50)
+  blobs.push(new Blob);
+},10);
+
+// Self cleaning
+
+setInterval(() => {
+  console.log(blobs);
+  for (let i = 0; i < blobs.length; i++) {
+    if (blobs[i].isTouchingBlobs == true) {
+      blobs.splice(i, 1);
+    }
+  }
+},5000);
 
 </script>

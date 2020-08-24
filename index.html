@@ -1,17 +1,20 @@
 <html>
-  <canvas id="myCanvas" height="600" width="600">
-</html>
+  <center>
+  <canvas id="myCanvas" height="600" width="600" style="border:1px solid #000000;">
+  </center>
+  </html>
 
 <script>
 
 let canvas = document.getElementById("myCanvas");
 let context = canvas.getContext("2d");
-
+context.fillStyle = "#FFFFFF";
+context.fillRect(0, 0, 600, 600);
 let blobs = [];
 
 class Blob {
   constructor() {
-    this.radius = Math.floor(Math.random() * (15 - 5) + 5);
+    this.radius = Math.floor(Math.random() * (8 - 5) + 5);
     this.x = Math.floor(Math.random() * 600);
     this.y = Math.floor(Math.random() * 600);
     this.isTouchingBlobs = false;
@@ -34,7 +37,7 @@ class Blob {
       context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
       context.fillStyle = `#${Math.floor(Math.random() * 1000)}`
       context.fill();
-    },100)
+    },2000)
   
   }
 
@@ -45,12 +48,11 @@ class Blob {
 
 setInterval(() => {
   blobs.push(new Blob);
-},10);
+});
 
 // Self cleaning
 
 setInterval(() => {
-  console.log(blobs);
   for (let i = 0; i < blobs.length; i++) {
     if (blobs[i].isTouchingBlobs == true) {
       blobs.splice(i, 1);

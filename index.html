@@ -15,9 +15,7 @@ class Blob {
     this.x = Math.floor(Math.random() * 600);
     this.y = Math.floor(Math.random() * 600);
     this.isTouchingBlobs = false;
-    this.blobsChecked = 0;
     for (let i = 0; i < blobs.length; i++) {
-      this.blobsChecked++;
       this.distance_x = Math.abs(blobs[i].x - this.x);
       this.distance_y = Math.abs(blobs[i].y - this.y);
       this.radii_sum = blobs[i].radius + this.radius;
@@ -39,7 +37,7 @@ class Blob {
     },100)
   
   }
-  
+
   }
 }
 

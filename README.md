@@ -1,4 +1,4 @@
 # bubble-generator
 Create cool colorful bubbles with javascript
 
-Demo : https://lexofficial.github.io/bubble-generator/
+Demo : https://lexofficial29.github.io/bubble-generator/
